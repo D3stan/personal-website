@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Engineer Portfolio</title>
+    <title>Portfolio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231e40af'/%3E%3Cpath d='M10 16a6 6 0 1 1 12 0 6 6 0 0 1-12 0zm6-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' fill='%23fff'/%3E%3C/svg%3E">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net/">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -415,8 +417,7 @@
                 Get In Touch
             </h2>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
+            <div>
                     <p class="text-gray-400 mb-8">
                         Interested in working together or have questions about embedded systems? 
                         Feel free to reach out through any of the channels below.
@@ -453,28 +454,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
-                    <h3 class="text-xl font-bold mb-6">Send a Message</h3>
-                    <form action="mailto:contact@0xpuddu.it" method="POST" enctype="text/plain">
-                        <div class="mb-4">
-                            <label class="block text-gray-400 text-sm mb-2" for="name">Name</label>
-                            <input type="text" id="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-400 text-sm mb-2" for="email">Email</label>
-                            <input type="email" id="email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-400 text-sm mb-2" for="message">Message</label>
-                            <textarea id="message" rows="4" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        </div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition w-full">
-                            Send Message
-                        </button>
-                    </form>
-                </div>
             </div>
         </section>
     </div>
