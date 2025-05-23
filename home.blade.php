@@ -145,17 +145,7 @@
                         <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
                         <div class="w-3 h-3 rounded-full bg-green-500"></div>
                     </div>
-                    <div class="mb-2">> alex --profile</div>
-                    <div class="mb-2">Name: Alex Carter</div>
-                    <div class="mb-2">Specialization: Embedded Systems</div>
-                    <div class="mb-2">Experience: 5+ years</div>
-                    <div class="mb-2">Education: M.Sc. Electrical Engineering</div>
-                    <div class="mb-2">> skills --list</div>
-                    <div class="mb-2">- Bare-metal C/C++</div>
-                    <div class="mb-2">- RTOS (FreeRTOS, Zephyr)</div>
-                    <div class="mb-2">- PCB Design (Altium, KiCad)</div>
-                    <div class="mb-2">- Low-power optimization</div>
-                    <div class="mb-2">> _<span class="cursor">|</span></div>
+                    <div class="mb-2"></div>
                 </div>
                 <div>
                     <p class="text-gray-400 mb-6">
@@ -516,77 +506,107 @@
     </div>
 
     <script>
-        // Simple terminal typing effect
+        // Improved terminal typing effect
+        // Types each line smoothly, cursor always at the end, no glitches
+
         document.addEventListener('DOMContentLoaded', function() {
             const terminalText = [
-                "> alex --skills",
-                "- Bare-metal C/C++ development",
-                "- RTOS implementation (FreeRTOS, Zephyr)",
-                "- PCB design and schematic capture",
-                "- Low-power optimization techniques",
-                "- Communication protocols (I2C, SPI, UART, CAN)",
-                "- Embedded Linux systems",
-                "> _"
+                '> alex --profile',
+                'Name: Alex Carter',
+                'Specialization: Embedded Systems',
+                'Experience: 5+ years',
+                'Education: M.Sc. Electrical Engineering',
+                '> skills --list',
+                '- Bare-metal C/C++',
+                '- RTOS (FreeRTOS, Zephyr)',
+                '- PCB Design (Altium, KiCad)',
+                '- Low-power optimization',
+                '> _'
             ];
-            
+
             const terminal = document.querySelector('.terminal');
             if (terminal) {
                 let currentLine = 0;
                 let currentChar = 0;
                 let typing = false;
-                
-                function typeTerminal() {
-                    if (!typing) {
-                        typing = true;
-                        const cursor = terminal.querySelector('.cursor');
-                        if (cursor) cursor.style.display = 'none';
-                        
-                        const interval = setInterval(() => {
-                            if (currentLine < terminalText.length) {
-                                const line = terminalText[currentLine];
-                                if (currentChar < line.length) {
-                                    const textElement = terminal.querySelector('div:last-child');
-                                    if (textElement) {
-                                        textElement.textContent = line.substring(0, currentChar + 1);
-                                        currentChar++;
-                                    }
-                                } else {
-                                    currentLine++;
-                                    currentChar = 0;
-                                    if (currentLine < terminalText.length) {
-                                        const newLine = document.createElement('div');
-                                        newLine.className = 'mb-2';
-                                        terminal.appendChild(newLine);
-                                    }
-                                }
-                            } else {
-                                clearInterval(interval);
-                                const cursor = terminal.querySelector('.cursor');
-                                if (cursor) cursor.style.display = 'inline';
-                                setTimeout(resetTerminal, 3000);
-                            }
-                        }, 50);
-                    }
-                }
-                
-                function resetTerminal() {
-                    typing = false;
+                let interval = null;
+                let lines = [];
+
+                // Clear and initialize terminal
+                function initTerminal() {
+                    terminal.innerHTML = `
+                        <div class="flex mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="mb-2"></div>
+                    `;
+                    lines = Array.from(terminal.querySelectorAll('div.mb-2'));
                     currentLine = 0;
                     currentChar = 0;
-                    const lines = terminal.querySelectorAll('div.mb-2');
-                    lines.forEach((line, index) => {
-                        if (index > 0) {
-                            line.remove();
-                        } else {
-                            line.textContent = "> alex --profile";
-                        }
-                    });
-                    setTimeout(typeTerminal, 1000);
                 }
-                
-                setTimeout(typeTerminal, 2000);
+
+                function typeTerminal() {
+                    typing = true;
+                    // Remove all lines except the color bar
+                    const colorBar = terminal.querySelector('.flex.mb-4');
+                    terminal.innerHTML = '';
+                    if (colorBar) terminal.appendChild(colorBar);
+                    lines = [];
+                    // Add empty lines for each terminalText line
+                    for (let i = 0; i < terminalText.length; i++) {
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'mb-2';
+                        terminal.appendChild(lineDiv);
+                        lines.push(lineDiv);
+                    }
+                    // Add the blinking cursor span to the last line
+                    const cursorSpan = document.createElement('span');
+                    cursorSpan.className = 'cursor';
+                    cursorSpan.textContent = '|';
+                    lines[lines.length - 1].appendChild(cursorSpan);
+
+                    currentLine = 0;
+                    currentChar = 0;
+                    // Start typing
+                    interval = setInterval(() => {
+                        if (currentLine < terminalText.length) {
+                            const line = terminalText[currentLine];
+                            // Remove cursor from all lines
+                            lines.forEach((l, idx) => {
+                                const c = l.querySelector('.cursor');
+                                if (c) c.remove();
+                            });
+                            // Type next character
+                            lines[currentLine].textContent = line.substring(0, currentChar + 1);
+                            // Add cursor to current line
+                            const cursor = document.createElement('span');
+                            cursor.className = 'cursor';
+                            cursor.textContent = '|';
+                            lines[currentLine].appendChild(cursor);
+                            currentChar++;
+                            if (currentChar > line.length) {
+                                // Line done, move to next
+                                currentLine++;
+                                currentChar = 0;
+                            }
+                        } else {
+                            // Typing done, cursor stays at end
+                            clearInterval(interval);
+                            typing = false;
+                            setTimeout(() => {
+                                initTerminal();
+                                setTimeout(typeTerminal, 1000);
+                            }, 3000);
+                        }
+                    }, 40);
+                }
+
+                initTerminal();
+                setTimeout(typeTerminal, 1000);
             }
-            
+
             // PCB trace animation toggle
             const pcbTrace = document.querySelector('.pcb-trace');
             if (pcbTrace) {
@@ -594,7 +614,7 @@
                     this.classList.toggle('pcb-trace');
                 });
             }
-            
+
             // Smooth scrolling for navigation
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
