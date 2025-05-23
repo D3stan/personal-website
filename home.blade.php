@@ -1,72 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embedded Engineer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        .pcb-bg {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%231e40af" stroke-width="0.5"/><circle cx="20" cy="20" r="1" fill="%231e40af"/><circle cx="50" cy="20" r="1" fill="%231e40af"/><circle cx="80" cy="20" r="1" fill="%231e40af"/><circle cx="20" cy="50" r="1" fill="%231e40af"/><circle cx="50" cy="50" r="1" fill="%231e40af"/><circle cx="80" cy="50" r="1" fill="%231e40af"/><circle cx="20" cy="80" r="1" fill="%231e40af"/><circle cx="50" cy="80" r="1" fill="%231e40af"/><circle cx="80" cy="80" r="1" fill="%231e40af"/></svg>');
-            background-size: 100px 100px;
-        }
-        .terminal {
-            font-family: 'Courier New', monospace;
-            background-color: #1a1a1a;
-            color: #00ff00;
-            border-radius: 8px;
-            padding: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .terminal::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 30px;
-            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
-            opacity: 0.2;
-        }
-        .cursor {
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .hexagon {
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        }
-        .pcb-trace {
-            position: relative;
-        }
-        .pcb-trace::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.3), transparent);
-            animation: trace 3s linear infinite;
-        }
-        @keyframes trace {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-    </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+            .floating {
+                animation: float 3s ease-in-out infinite;
+            }
+            .pcb-bg {
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%231e40af" stroke-width="0.5"/><circle cx="20" cy="20" r="1" fill="%231e40af"/><circle cx="50" cy="20" r="1" fill="%231e40af"/><circle cx="80" cy="20" r="1" fill="%231e40af"/><circle cx="20" cy="50" r="1" fill="%231e40af"/><circle cx="50" cy="50" r="1" fill="%231e40af"/><circle cx="80" cy="50" r="1" fill="%231e40af"/><circle cx="20" cy="80" r="1" fill="%231e40af"/><circle cx="50" cy="80" r="1" fill="%231e40af"/><circle cx="80" cy="80" r="1" fill="%231e40af"/></svg>');
+                background-size: 100px 100px;
+            }
+            .terminal {
+                font-family: 'Courier New', monospace;
+                background-color: #1a1a1a;
+                color: #00ff00;
+                border-radius: 8px;
+                padding: 1rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .terminal::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 30px;
+                background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+                opacity: 0.2;
+            }
+            .cursor {
+                animation: blink 1s step-end infinite;
+            }
+            @keyframes blink {
+                from, to { opacity: 1; }
+                50% { opacity: 0; }
+            }
+            .hexagon {
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            }
+            .pcb-trace {
+                position: relative;
+            }
+            .pcb-trace::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.3), transparent);
+                animation: trace 3s linear infinite;
+            }
+            @keyframes trace {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+        </style>
+    @endif
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen pcb-bg">
+<body class="bg-gray-900 text-gray-100 min-h-screen pcb-bg font-sans antialiased">
     <div class="container mx-auto px-4 py-12">
         <!-- Header -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-16">
