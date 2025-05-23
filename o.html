@@ -192,9 +192,11 @@
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full">KiCad</span>
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full">Sensors</span>
                             </div>
-                            <button class="text-blue-400 hover:text-blue-300 flex items-center">
-                                View Project Details
-                                <i class="fas fa-arrow-right ml-2"></i>
+                            <button class="text-blue-400 hover:text-blue-300 flex items-center" onclick="window.location.hash = 'projects';">
+                                <a href="#projects" class="flex items-center">
+                                    View Project Details
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
                             </button>
                         </div>
                         <div class="relative">
@@ -231,8 +233,8 @@
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">STM32</span>
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">CAN</span>
                             </div>
-                            <button class="text-blue-400 hover:text-blue-300 text-sm">
-                                Details
+                            <button class="text-blue-400 hover:text-blue-300 text-sm" onclick="window.location.hash = 'projects';">
+                                <a href="#projects" class="text-blue-400 hover:text-blue-300 text-sm">Details</a>
                             </button>
                         </div>
                     </div>
@@ -252,8 +254,8 @@
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">ESP32</span>
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">PWM</span>
                             </div>
-                            <button class="text-blue-400 hover:text-blue-300 text-sm">
-                                Details
+                            <button class="text-blue-400 hover:text-blue-300 text-sm" onclick="window.location.hash = 'projects';">
+                                <a href="#projects" class="text-blue-400 hover:text-blue-300 text-sm">Details</a>
                             </button>
                         </div>
                     </div>
@@ -273,8 +275,8 @@
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">C</span>
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Sensors</span>
                             </div>
-                            <button class="text-blue-400 hover:text-blue-300 text-sm">
-                                Details
+                            <button class="text-blue-400 hover:text-blue-300 text-sm" onclick="window.location.hash = 'projects';">
+                                <a href="#projects" class="text-blue-400 hover:text-blue-300 text-sm">Details</a>
                             </button>
                         </div>
                     </div>
@@ -427,7 +429,7 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">Email</div>
-                                <div class="font-medium">contact@0xpuddu.it</div>
+                                <div class="font-medium"><a href="mailto:contact@0xpuddu.it" class="hover:underline text-blue-300">contact@0xpuddu.it</a></div>
                             </div>
                         </div>
                         
@@ -437,7 +439,7 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">GitHub</div>
-                                <div class="font-medium">github.com/D3stan</div>
+                                <div class="font-medium"><a href="https://github.com/D3stan" target="_blank" rel="noopener" class="hover:underline text-blue-300">github.com/D3stan</a></div>
                             </div>
                         </div>
                         
@@ -447,7 +449,7 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">LinkedIn</div>
-                                <div class="font-medium">linkedin.com/in/0xalessandro-porcheddu</div>
+                                <div class="font-medium"><a href="https://linkedin.com/in/0xalessandro-porcheddu" target="_blank" rel="noopener" class="hover:underline text-blue-300">linkedin.com/in/0xalessandro-porcheddu</a></div>
                             </div>
                         </div>
                     </div>
@@ -455,7 +457,7 @@
                 
                 <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
                     <h3 class="text-xl font-bold mb-6">Send a Message</h3>
-                    <form>
+                    <form action="mailto:contact@0xpuddu.it" method="POST" enctype="text/plain">
                         <div class="mb-4">
                             <label class="block text-gray-400 text-sm mb-2" for="name">Name</label>
                             <input type="text" id="name" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
