@@ -185,8 +185,10 @@
                         <div>
                             <h3 class="text-2xl font-bold mb-2">Motorcycle CDI ECU</h3>
                             <p class="text-gray-400 mb-4">
-                                Custom PCB with STM32 microcontroller, BLE connectivity, and environmental sensors.
-                                Designed for ultra-low power operation with 2+ year battery life.
+                                Custom PCB with ESP32 microcontroller, WiFi interface and WebSocker communication, multiple sensors and ICs.
+                                3D printed case designed with Fusion 360.
+                                Easy to use web interface to configure the ECU.
+                                Remote updates and version control with custom OTA server.
                             </p>
                             <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="text-xs bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full">ESP32</span>
