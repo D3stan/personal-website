@@ -42,9 +42,11 @@ function initializeTerminal() {
     let lines = [];
     let currentPart = 1; // 1 for first part, 2 for second part
     let isDeleting = false;
+    let animationComplete = false;
 
     // Clear and initialize terminal
     function initTerminal() {
+        terminal.classList.remove('interactive');
         terminal.innerHTML = `
             <div class="flex mb-4">
                 <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
@@ -57,6 +59,7 @@ function initializeTerminal() {
         currentChar = 0;
         currentPart = 1;
         isDeleting = false;
+        animationComplete = false;
     }
 
     function getContentContainer() {
@@ -138,6 +141,8 @@ function initializeTerminal() {
                 } else {
                     // Part 2 done, stop here
                     typing = false;
+                    animationComplete = true;
+                    terminal.classList.add('interactive');
                 }
             }
         }, 50); // Typing speed
@@ -149,6 +154,25 @@ function initializeTerminal() {
         // Immediately call the callback
         callback();
     }
+
+    // Function to restart the animation
+    function restartAnimation() {
+        if (animationComplete && !typing) {
+            clearInterval(interval);
+            initTerminal();
+            setTimeout(typeText, 1000);
+        }
+    }
+
+    // Add event listeners for restart functionality
+    terminal.addEventListener('click', restartAnimation);
+    
+    // Add keyboard event listener for Enter key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && animationComplete && !typing) {
+            restartAnimation();
+        }
+    });
 
     // Initialize and start the typing effect
     initTerminal();

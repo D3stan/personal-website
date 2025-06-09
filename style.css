@@ -51,6 +51,17 @@
     height: 280px;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.terminal.interactive {
+    cursor: pointer;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.terminal.interactive:hover {
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
 }
 
 .terminal::before {
