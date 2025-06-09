@@ -2,15 +2,15 @@
 
 // Terminal typing effect configuration
 const terminalTextPart1 = [
-    '> alessandro --profile',
+    '> profile --info',
     'Name: Alessandro Porcheddu',
     'Specialization: Embedded Systems',
     'Languages: Italian, English',
-    'Education: B.Sc. CS and Engineering',
-    '> skills --list'
+    'Education: B.Sc. CS and Engineering'
 ];
 
 const terminalTextPart2 = [
+    '> profile --skills',
     '- C/C++',
     '- RTOS',
     '- PCB Design (KiCad)',
@@ -136,50 +136,18 @@ function initializeTerminal() {
                         typeText();
                     }, 2000);
                 } else {
-                    // Part 2 done, restart the whole cycle
-                    setTimeout(() => {
-                        initTerminal();
-                        setTimeout(typeText, 1000);
-                    }, 3000);
+                    // Part 2 done, stop here
+                    typing = false;
                 }
             }
         }, 50); // Typing speed
     }
 
     function deleteContent(container, callback) {
-        const allLines = container.querySelectorAll('.mb-2');
-        let lineIndex = allLines.length - 1;
-        
-        const deleteInterval = setInterval(() => {
-            if (lineIndex >= 0) {
-                const currentLine = allLines[lineIndex];
-                const currentText = currentLine.textContent.replace('|', '');
-                
-                if (currentText.length > 0) {
-                    // Remove cursor first
-                    const cursor = currentLine.querySelector('.cursor');
-                    if (cursor) cursor.remove();
-                    
-                    // Delete one character
-                    const newText = currentText.substring(0, currentText.length - 1);
-                    currentLine.textContent = newText;
-                    
-                    // Add cursor back
-                    const cursor2 = document.createElement('span');
-                    cursor2.className = 'cursor';
-                    cursor2.textContent = '|';
-                    currentLine.appendChild(cursor2);
-                } else {
-                    // Line is empty, move to previous line
-                    currentLine.remove();
-                    lineIndex--;
-                }
-            } else {
-                // All content deleted
-                clearInterval(deleteInterval);
-                callback();
-            }
-        }, 30); // Deletion speed
+        // Remove all content at once
+        container.innerHTML = '';
+        // Immediately call the callback
+        callback();
     }
 
     // Initialize and start the typing effect
